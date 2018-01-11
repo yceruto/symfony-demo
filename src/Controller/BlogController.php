@@ -76,7 +76,12 @@ class BlogController extends AbstractController
         //
         // dump($post, $this->getUser(), new \DateTime());
 
-        return $this->render('blog/post_show.html.twig', ['post' => $post]);
+        $form = $this->createForm(CommentType::class);
+
+        return $this->render('blog/post_show.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -93,7 +98,7 @@ class BlogController extends AbstractController
     {
         $comment = new Comment();
         $comment->setAuthor($this->getUser());
-        $post->addComment($comment);
+        $comment->setPost($post);
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -117,28 +122,14 @@ class BlogController extends AbstractController
             // See https://symfony.com/doc/current/components/event_dispatcher.html
             $eventDispatcher->dispatch(Events::COMMENT_CREATED, $event);
 
+            $this->addFlash('success', 'comment.published_successfully');
+
             return $this->redirectToRoute('blog_post', ['slug' => $post->getSlug()]);
         }
 
-        return $this->render('blog/comment_form_error.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
-    }
+        $this->addFlash('danger', 'comment.published_error');
 
-    /**
-     * This controller is called directly via the render() function in the
-     * blog/post_show.html.twig template. That's why it's not needed to define
-     * a route name for it.
-     *
-     * The "id" of the Post is passed in and then turned into a Post object
-     * automatically by the ParamConverter.
-     */
-    public function commentForm(Post $post): Response
-    {
-        $form = $this->createForm(CommentType::class);
-
-        return $this->render('blog/_comment_form.html.twig', [
+        return $this->render('blog/post_show.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);

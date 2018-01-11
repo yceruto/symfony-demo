@@ -51,8 +51,9 @@
                 <source>title.add_comment</source>
                 <target>Voeg een reactie toe</target>
             </trans-unit>
-            <trans-unit id="title.comment_error">
-                <source>title.comment_error</source>
+
+            <trans-unit id="comment.published_error">
+                <source>comment.published_error</source>
                 <target>Er is een fout opgetreden bij het opslaan van uw reactie</target>
             </trans-unit>
 

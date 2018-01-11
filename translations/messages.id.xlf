@@ -51,8 +51,9 @@
                 <source>title.add_comment</source>
                 <target>Tambahkan komentar</target>
             </trans-unit>
-            <trans-unit id="title.comment_error">
-                <source>title.comment_error</source>
+
+            <trans-unit id="comment.published_error">
+                <source>comment.published_error</source>
                 <target>Ada kesalahan penerbitan komentar Anda</target>
             </trans-unit>
 

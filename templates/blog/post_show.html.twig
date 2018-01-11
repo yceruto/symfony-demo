@@ -22,7 +22,7 @@
         See https://symfony.com/doc/current/cookbook/security/remember_me.html#forcing-the-user-to-re-authenticate-before-accessing-certain-resources
         #}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ render(controller('App\\Controller\\BlogController:commentForm', {'id': post.id})) }}
+            {{ include('blog/_comment_form.html.twig') }}
         {% else %}
             <p>
                 <a class="btn btn-success" href="{{ path('security_login') }}">

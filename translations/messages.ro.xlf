@@ -51,8 +51,9 @@
                 <source>title.add_comment</source>
                 <target>Adaugă un comentariu</target>
             </trans-unit>
-            <trans-unit id="title.comment_error">
-                <source>title.comment_error</source>
+
+            <trans-unit id="comment.published_error">
+                <source>comment.published_error</source>
                 <target>A intervenit o eroare la publicarea comentariului tău</target>
             </trans-unit>
 
